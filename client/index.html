@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js mit Express.js und MySQL</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="./app.js" defer></script>
+</head>
+<body>
+
+    <div id="app">
+        <h2>Simple Fullstack Applikation zusammengestellt aus VueJs, NodeJs, ExpressJs und SQL</h2>
+
+        <div class="eingabe-bereich">
+            <input v-model="frage" placeholder="Frage">
+            <input v-model="antwort" placeholder="Antwort">
+            <button @click="senden">Senden</button>
+        </div>
+    
+        <div class="frage-antwort-liste">
+            <div v-for="(item, index) in fragenAntworten" :key="item.id" class="frage-antwort-container">
+                <!-- Frage anzeigen oder bearbeiten -->
+                <div v-if="!item.editing" class="frage">{{ item.id }}. Frage: {{ item.frage }}</div>
+                <input v-else v-model="item.frage" placeholder="Frage">
+    
+                <!-- Antwort anzeigen oder bearbeiten -->
+                <div v-if="!item.editing" class="antwort">Antwort: {{ item.antwort }}</div>
+                <input v-else v-model="item.antwort" placeholder="Antwort">
+    
+                <!-- Bearbeiten/Speichern und Löschen Buttons -->
+                <div class="aktionen">
+                    <button @click="item.editing ? saveEdit(item.id) : item.editing = true" class="bearbeiten-speichern-btn">
+                        {{ item.editing ? 'Speichern' : 'Bearbeiten' }}
+                    </button>
+                    <button @click="deleteRow(item.id)" class="loeschen-btn">Löschen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        body, input, button {
+            font-family: 'Arial', sans-serif;
+        }
+    
+        #app {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+    
+        input {
+            display: block;
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+    
+        button:hover {
+            background-color: #0056b3;
+        }
+    
+        .frage-antwort-container {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+    
+        .frage-antwort-container:last-child {
+            border-bottom: none;
+        }
+    
+        .frage-antwort-container span, .frage-antwort-container input {
+            margin-right: 10px;
+            line-height: 1.5;
+        }
+    
+        .bearbeiten-speichern-btn {
+            display: inline-block;
+            margin-top: 10px;
+        }
+    
+        .loeschen-btn {
+            background-color: #dc3545;
+        }
+    
+        .loeschen-btn:hover {
+            background-color: #c82333;
+        }
+
+        .eingabe-bereich {
+            margin-bottom: 40px;
+        }
+    
+        .frage-antwort-liste {
+            margin-top: 30px;
+        }
+    
+        .frage, .antwort {
+            font-size: 16px;
+            color: #333;
+        }
+    
+        .frage {
+            font-weight: bold;
+        }
+    
+        .antwort {
+            padding-left: 17px;
+        }
+    
+        .aktionen {
+            margin-top: 10px;
+        }
+    </style>
+    
+</body>
+</html>
