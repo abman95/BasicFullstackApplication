@@ -1,3 +1,5 @@
+![BasicFullstackApplication](https://github.com/abman95/BasicFullstackApplication/assets/132164884/3ca09443-9f42-419c-b1eb-1464d90f3047)
+
 # Installation Guide for Basic Fullstack Application
 
 Operating System Used for Instructions: Linux Kubuntu
